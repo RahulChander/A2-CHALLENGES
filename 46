@@ -1,0 +1,15 @@
+a = int(input('number'))
+small = 1
+large = 101
+win = 0
+
+while win == 0:
+    b = int((small+large)/2)
+    if b > a:
+        large = b
+    elif b < a:
+        small = b
+    elif b == a:
+        print("I guess that your number is: " + str(b))
+        win = 1
+
