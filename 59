@@ -1,0 +1,33 @@
+# Expand a binomial
+# TErms needed are a, b and n
+
+a = input("Please enter term a")
+
+b = input("Please enter term b")
+n = int(input("Please enter power max"))
+numberofterms = n + 2
+
+def factorial(x):
+    total = 1
+
+    while x != 1:
+        if x == 0:
+            break
+        total *= x
+        x -= 1
+    return total
+
+
+for i in range(0,numberofterms,1):
+    nfact = factorial(n)
+    nminusrfact = factorial(n-i)
+    rfact = factorial(i)
+    combination = nfact/(nminusrfact*rfact)
+    combination = int(combination)
+    powerofa = (n-i)
+    powerofb = i
+    final_string = str(combination) + ' (' + a + ')^' + str(powerofa) + ' (' + b + ')^' + str(powerofb)
+    print(final_string)
+
+
+
