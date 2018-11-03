@@ -1,0 +1,118 @@
+# PART 1
+
+
+def random(i):
+
+    List = []
+    List2 = []
+    ii = str(i)
+    for w in ii:
+        List.append(w)
+
+
+    for i in range(len(List)-1,-1,-1):
+        e = '0'*(len(List)-1-i)
+        string2 = List[i] + e
+        List2.append(string2)
+
+    while len(List2) != 4:
+        List2.append('0')
+    List3 = []
+
+    i = List2[0]
+    if i == '1':
+        List3.append('I')
+    if i == '2':
+        List3.append('II')
+    if i == '3':
+        List3.append('III')
+    if i == '4':
+        List3.append('IV')
+    if i == '5':
+        List3.append('V')
+    if i == '6':
+        List3.append('VI')
+    if i == '7':
+        List3.append('VII')
+    if i == '8':
+        List3.append('VIII')
+    if i == '9':
+       List3.append('IX')
+
+
+
+
+    j = List2[1]
+    if j == '10':
+        List3.append('X')
+    if j == '20':
+       List3.append('XX')
+    if j == '30':
+        List3.append('XXX')
+    if j == '40':
+       List3.append('XL')
+    if j == '50':
+        List3.append('L')
+    if j == '60':
+        List3.append('LX')
+    if j == '70':
+        List3.append('LXX')
+    if j == '80':
+     List3.append('LXXX')
+    if j == '90':
+        List3.append('CX')
+
+    j = List2[2]
+    if j == '100':
+        List3.append('C')
+    if j == '200':
+        List3.append('CC')
+    if j == '300':
+        List3.append('CCC')
+    if j == '400':
+        List3.append('CD')
+    if j == '500':
+        List3.append('D')
+    if j == '600':
+        List3.append('DC')
+    if j == '700':
+        List3.append('DCC')
+    if j == '800':
+        List3.append('DCCC')
+    if j == '900':
+        List3.append('CM')
+
+    j = List2[3]
+    if j == '1000':
+        List3.append('M')
+    if j == '2000':
+        List3.append('MM')
+    if j == '3000':
+        List3.append('MMM')
+    if j == '4000':
+        List3.append('MMMM')
+    if j == '5000':
+        List3.append('MMMMM')
+    if j == '6000':
+        List3.append('MMMMMM')
+    if j == '7000':
+        List3.append('MMMMMMM')
+    if j == '8000':
+        List3.append('MMMMMMMM')
+    if j == '9000':
+        List3.append('MMMMMMMMM')
+
+    string2 = ''
+    for i in range(len(List3)-1,-1,-1):
+        string2 += List3[i]
+    return(string2)
+
+print(random(300))
+
+a = input("Please enter roman numeral")
+
+for j in range(4000):
+    w = random(j)
+    if w == a:
+        print(j)
+
