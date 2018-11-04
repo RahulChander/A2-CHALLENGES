@@ -1,0 +1,192 @@
+# Poker hands
+# 1 pair
+
+winnumber = 0
+
+WORDLIST_FILENAME = "/Users/rahulchander/Desktop/poker.txt"
+
+def loadWords():
+    """
+    Returns a list of valid words. Words are strings of lowercase letters.
+
+    Depending on the size of the word list, this function may
+    take a while to finish.
+    """
+    print("Loading word list from file...")
+    # inFile: file
+    inFile = open(WORDLIST_FILENAME, 'r')
+    # wordList: list of strings
+    wordList = []
+    for line in inFile:
+        wordList.append(line.strip().lower())
+    print("  ", len(wordList), "words loaded.")
+    return wordList
+
+wordList = loadWords()
+
+def makehandlist(w):
+    Numbers = []
+    Suits = []
+    for i in w:
+        if len(i) == 3:
+            Numbers.append(10)
+            Suits.append(i[2])
+        else:
+            Suits.append(i[1])
+            if i[0] == 'k':
+                Numbers.append(13)
+            elif i[0] == 'q':
+                Numbers.append(12)
+            elif i[0] == 'j':
+                Numbers.append(11)
+            elif i[0] == 'a':
+                Numbers.append(14)
+            elif i[0] == 't':
+                Numbers.append(10)
+            else:
+                Numbers.append(int(i[0]))
+
+    return(Numbers, Suits)
+
+def findconsecutivevalues(Number):
+     Number = sorted(Number)
+     check = 0
+     for i in range(0,4,1):
+         first = Number[i]
+         second = Number[i+1]
+         if second - first != 1:
+             check = 1
+     if check == 0:
+         return True
+     else:
+         return False
+
+def checksamesuit(Suit):
+    if Suit[0] == Suit[1] == Suit[2] == Suit[3] == Suit[4]:
+        return True
+    else:
+        return False
+
+
+def numberstreaks(Number):
+    dict = {}
+    for i in range(2,15,1):
+        dict[i] = 0
+    for i in Number:
+        for j in dict.keys():
+            w = dict[j]
+            if i == j:
+                w += 1
+                dict[j] = w
+
+    return dict
+
+def checkhand(Number,Suit):
+    winnumber = 0
+    Number = sorted(Number)
+    newdict = numberstreaks(Number)
+    threecount = 0
+    twocount = 0
+
+    if checksamesuit(Suit) == True:
+        if findconsecutivevalues(Number) == False:
+            print("This is a flush")
+            winnumber = 5
+        else:
+            if Number[4] == 14:
+                print("This is a royal flush")
+                winnumber = 9
+            else:
+                print("This is a straight flush")
+                winnumber = 8
+
+    elif findconsecutivevalues(Number) == True:
+        print("This is a straight")
+        winnumber = 4
+
+
+    else:
+        for i in newdict.values():
+            if i == 4:
+                print("This is Four of a kind")
+                winnumber = 7
+                break
+            else:
+
+                if i == 3:
+                    threecount += 1
+                if i == 2:
+                    twocount += 1
+
+        if threecount == 1 and twocount == 1:
+            print("This is a full house")
+            winnumber = 6
+
+        elif threecount == 1:
+            print("Three of a kind")
+            winnumber = 3
+
+        elif twocount == 2:
+            print("Two pairs")
+            winnumber = 2
+
+        elif twocount == 1:
+            print("One pair")
+            winnumber = 1
+
+    return winnumber
+
+def oneplayer(List):
+    w = makehandlist(List)
+    x = w[0]
+    y = w[1]
+    return(checkhand(x,y))
+
+
+
+
+def getplayerone(string):
+    List = []
+    List.append(string[0:2])
+    List.append(string[3:5])
+    List.append(string[6:8])
+    List.append(string[9:11])
+    List.append(string[12:14])
+    return List
+
+
+def getplayertwo(string):
+    List = []
+    List.append(string[15:17])
+    List.append(string[18:20])
+    List.append(string[21:23])
+    List.append(string[24:26])
+    List.append(string[27:29])
+    return List
+
+def playoneround(string):
+    w = getplayerone(string)
+    x = getplayertwo(string)
+
+    player1 = oneplayer(w)
+    player2 = oneplayer(x)
+
+    if player1 > player2:
+        return 1
+    elif player1 < player2:
+        return 2
+    else:
+        return 0
+
+# PLAY A GAME
+
+Play1 = 0
+Play2 = 0
+for i in wordList:
+    w = playoneround(i)
+    if w == 1:
+        Play1 += 1
+    elif w == 2:
+        Play2 += 1
+print(Play1)
+print(Play2)
