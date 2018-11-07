@@ -1,0 +1,104 @@
+
+class Point:
+    """ Create a new Point, at coordinates x, y """
+
+    def __init__(self, x=0, y=0):
+        """ Create a new point at x, y """
+        self.x1 = x
+        self.y1 = y
+
+    def reflect_x(self):
+        a = -1 * self.x1
+        b = self.y1
+        return Point(a, b)
+
+    def getlineto(self,a):
+        gradient = (a.y1 - self.y1)/(a.x1-self.x1)
+        c = a.y1 - (gradient * a.x1)
+        return (gradient,c)
+
+    def slope_from_origin(self):
+        return (self.y1) / self.x1
+
+    def find_dist(self,a):
+        w = a[0] - self.x1
+        x = a[1] - self.y1
+        w = w**2
+        x = x**2
+        e = w**2 + x**2
+        e = e**0.5
+        return e
+
+
+    def __str__(self):    # All we have done is renamed the method
+        return "({0}, {1})".format(self.x1, self.y1)
+
+class Rectangle:
+    """ A class to manufacture rectangle objects """
+
+    def __init__(self, posn, w, h):
+        """ Initialize rectangle at posn, with width w, height h """
+        self.corner = posn
+        self.width = w
+        self.height = h
+
+    def __str__(self):
+        return  "({0}, {1}, {2})".format(self.corner, self.width, self.height)
+
+    def area(self):
+        return (self.width * self.height)
+
+    def perimeter(self):
+        return 2*(self.width + self.height)
+
+    def flip(self):
+        w = self.height
+        x = self.width
+        self.width = w
+        self.height = x
+
+    def check_point(self,Point):
+        small = self.corner.x1
+        big = small + self.width
+        check = 0
+        if Point.x1 < big and Point.x1 >= small:
+            check += 1
+        small2 = self.corner.y1
+        big2 = small2 + self.height
+        if Point.y1 < big2 and Point.y1 >= small2:
+            check += 1
+        if check == 2:
+            return True
+        else:
+            return False
+
+
+# 6
+# check if rectangle collide - choose all corner points, check if in other rectangle
+
+r1 = Rectangle(Point(0, 0), 10, 5)
+corner1 = r1.corner
+corner2 = Point(r1.corner.x1 + r1.width, r1.corner.y1)
+corner3 = Point(r1.corner.x1, r1.corner.y1 + r1.height)
+corner4 = Point(r1.corner.x1 + r1.width, r1.corner.y1 + r1.height)
+List = [corner1,corner2,corner3,corner4]
+
+r2 = Rectangle(Point(0, 0), 10, 5)
+corner1a = r1.corner
+corner2a = Point(r1.corner.x1 + r1.width, r1.corner.y1)
+corner3a = Point(r1.corner.x1, r1.corner.y1 + r1.height)
+corner4a = Point(r1.corner.x1 + r1.width, r1.corner.y1 + r1.height)
+List2 = [corner1a,corner2a,corner3a,corner4a]
+
+check = 0
+
+for i in List:
+    if r2.check_point(i) == True:
+        check = 1
+for j in List2:
+    if r1.check_point(j) == True:
+        check = 1
+if check == 0:
+    print("Don't intersect")
+elif check == 1:
+    print("Intersect")
