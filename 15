@@ -1,0 +1,118 @@
+class Point:
+    """ Create a new Point, at coordinates x, y """
+
+    def __init__(self, x=0, y=0):
+        """ Create a new point at x, y """
+        self.x1 = x
+        self.y1 = y
+
+    def reflect_x(self):
+        a = -1 * self.x1
+        b = self.y1
+        return Point(a, b)
+
+    def getlineto(self,a):
+        gradient = (a.y1 - self.y1)/(a.x1-self.x1)
+        c = a.y1 - (gradient * a.x1)
+        return (gradient,c)
+
+    def slope_from_origin(self):
+        return (self.y1) / self.x1
+
+    def find_dist(self,a):
+        w = a[0] - self.x1
+        x = a[1] - self.y1
+        w = w**2
+        x = x**2
+        e = w**2 + x**2
+        e = e**0.5
+        return e
+
+
+    def __str__(self):    # All we have done is renamed the method
+        return "({0}, {1})".format(self.x1, self.y1)
+
+# 1
+
+p = Point()
+q = Point()
+p.x1 = 4
+p.y1 = 3
+distance = ((p.y1-q.y1)**2 + (p.x1-q.x1)**2)**0.5
+print(distance)
+
+
+# 2
+number2 = Point()
+number2.x1 = 4
+number2.y1 = 3
+print(number2.reflect_x())
+
+
+# 3
+print (Point(4,10).slope_from_origin())
+# As long as point coordinates are type int or float it works
+
+# 4
+print(Point(4, 11).getlineto(Point(6, 15)))
+
+# 5
+P1 = Point(0,0)
+P2 = Point(0,8)
+P3 = Point(4,4)
+P4 = Point(4,-4)
+win = 0
+while win == 0:
+    for x in range(0,8,1):
+        for y in range(0,7,1):
+            Pint = Point(x,y)
+            if Pint.find_dist((0,0)) == Pint.find_dist((0,8)) == Pint.find_dist((4,4)) == Pint.find_dist((-4,4)):
+                print(x,y)
+                win = 1
+
+
+# 6
+class SMS:
+
+    def __init__(my_inbox):
+        my_inbox.hasbeenviewed = []
+        my_inbox.from_number = []
+        my_inbox.time_arrived = []
+        my_inbox.text_of_sms = []
+
+
+    def add_new_arrival(my_inbox, from_number, time_arrived, text_of_SMS):
+        my_inbox.from_number.append(from_number)
+        my_inbox.hasbeenviewed.append(False)
+        my_inbox.time_arrived.append(time_arrived)
+        my_inbox.text_of_sms.append(text_of_SMS)
+
+
+    def message_count(my_inbox):
+        return len(my_inbox.hasbeenviewed)
+
+
+    def get_unread_indexes(my_inbox):
+        newList = []
+        for i in range (len(my_inbox.hasbeenviewed)):
+            w = my_inbox.hasbeenviewed[i]
+            if w == False:
+                newList.append(i)
+        return newList
+
+
+    def get_message(my_inbox,i):
+        try:
+            w = my_inbox.from_number[i]
+            x = my_inbox.time_arrived[i]
+            y = my_inbox.text_of_sms[i]
+            del my_inbox.hasbeenviewed[i]
+            my_inbox.hasbeenviewed.insert(i,True)
+            tuple = (w,x,y)
+            return tuple
+        except:
+            return None
+
+
+
+
