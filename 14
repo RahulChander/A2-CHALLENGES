@@ -1,0 +1,93 @@
+# 1
+string = 'the quick brown fox jumps over the lazy dog'
+dict = {}
+alpha = 'abcdefghijklmnopqrstuvwxyz'
+for i in alpha:
+    dict[i] = 0
+print(dict)
+for i in string:
+    for j in dict.keys():
+        if i == j:
+            w = dict[i]
+            w += 1
+            dict[i] = w
+print(dict)
+print(len(dict))
+print('a' in dict)
+
+
+
+
+# 2 ANSWERS
+# 35
+# 1
+# true
+# Invalid
+# Invalid
+# [Apples, Bananas, Grapes]
+# False
+def add_fruit(inventory, fruit, quantity):
+    if fruit not in inventory:
+        inventory[fruit] = quantity
+    else:
+        w = inventory[fruit]
+        w += quantity
+        inventory[fruit] = w
+    return inventory
+
+
+
+
+# 3
+
+
+WORDLIST_FILENAME = "/Users/rahulchander/Desktop/alice.txt"
+
+def loadWords():
+    """
+    Returns a list of valid words. Words are strings of lowercase letters.
+
+    Depending on the size of the word list, this function may
+    take a while to finish.
+    """
+    print("Loading word list from file...")
+    # inFile: file
+    inFile = open(WORDLIST_FILENAME, 'r')
+    # wordList: list of strings
+    wordList = []
+    try:
+        for line in inFile:
+
+            wordList.append(line.strip().lower())
+    except:
+        print('yeet')
+    print("  ", len(wordList), "words loaded.")
+    return wordList
+
+wordList = loadWords()
+
+List = []
+for i in wordList:
+    string = ''
+    for a in i:
+        if a in 'abcdefghijklmnopqrstuvwxyz':
+            string += a
+        else:
+            List.append(string)
+            string = ''
+print(List)
+
+dict = {}
+words = []
+
+for i in List:
+    if i not in words:
+        words.append(i)
+        dict[i] = 1
+    else:
+        w = dict[i]
+        w += 1
+        dict[i] = w
+
+print(dict)
+w = sorted(dict)
