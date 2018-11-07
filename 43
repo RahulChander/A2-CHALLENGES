@@ -1,0 +1,24 @@
+def readposint():
+    try:
+        x = int(input("Read int"))
+        if x < 0:
+            print("The number {0} is not a valid age".format(x))
+        else:
+            return True
+
+
+    except:
+        print('Running error')
+
+    finally:
+        print("Code complete")
+        print(" ")
+        print(" ")
+        print(" ")
+        print(" ")
+        print(" ")
+
+
+for i in range(3):
+    print(readposint())
+
