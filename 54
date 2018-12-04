@@ -1,0 +1,30 @@
+class CarRecord:
+
+    def __init__(self):
+        self.VehicleId = ''
+        self.Registration = ''
+        self.date = ''
+        self.enginesize = 0
+        self.purchaseprice = 0
+
+VID = []
+R = []
+date = []
+eng = []
+cost = []
+
+for i in range(0,5,1):
+    a = CarRecord
+    b = input("Please enter Vehicle")
+    VID.append(b)
+    c = input("Please enter Reg")
+    R.append(c)
+    d = input("Please enter date")
+    date.append(d)
+    e = input("Please enter engine size")
+    eng.append(e)
+    f = input("Please enter price")
+    cost.append(f)
+
+
+print(VID,R,date,eng,cost)
