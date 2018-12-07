@@ -1,0 +1,89 @@
+import random
+
+class makeCard():
+    def __init__(self):
+        self.Numbers = ['01','02','03','04','05','06','07','08','09','10','11','12','13']
+        self.Cards = ['Diamonds','Clubs','Hearts','Spades']
+        self.empty = []
+    def makeList(self):
+        for i in self.Numbers:
+            for j in self.Cards:
+                self.empty.append(str(i) + j)
+    def getRandomCard(self):
+        RandomNumber = random.randint(0,51)
+        CardToBeReturned = self.empty[RandomNumber]
+        return CardToBeReturned
+
+a = makeCard()
+def ChooseACard():
+    a.makeList()
+    b = a.getRandomCard()
+    return(b)
+
+
+def splitCard(x):
+    yeet = x[0:2]
+    yoot = x[2::]
+    yeet = int(yeet)
+    List = [yeet,yoot]
+    return List
+
+print(splitCard(ChooseACard()))
+
+def playGame():
+    players = int(input("Please enter number of players"))
+    List = []
+    List2 = []
+    for i in range(players):
+        List.append(splitCard(ChooseACard()))
+
+    for i in range(players):
+        a = input("Please enter name of each player")
+        List2.append(a)
+
+    return [List2,List]
+
+def Compare():
+    highestplayer =''
+    highestnumber = 0
+    highestsuit = 0
+
+    w = playGame()
+    print(w)
+    x = w[0]
+    w.remove(w[0])
+    for i in range(len(x)):
+        check = 0
+        print(w)
+
+        if (w[0][i][0]) > highestnumber:
+
+            if (w[0][i])[1] == 'Spades':
+                check = 3
+            if (w[0][i])[1] == 'Hearts':
+                check = 2
+            if (w[0][i])[1] == 'Clubs':
+                check = 1
+
+            if check >  highestsuit:
+                highestsuit = check
+
+            highestnumber = (w[0][i])[0]
+            highestplayer = x[i]
+
+    return [highestplayer,highestnumber,highestsuit]
+
+b= (Compare())
+c = b[0]
+d = str(b[1])
+e = ''
+if b[2] == 0:
+    e = 'Diamonds'
+if b[2]  == 1:
+    e  = 'Clubs'
+if b[2] == 2:
+    e = 'Hearts'
+if b[2] == 3:
+    e = 'Spades'
+
+print(c + " wins with the " + d + " of " + e + '.')
