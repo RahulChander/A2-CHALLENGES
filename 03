@@ -1,0 +1,24 @@
+import random
+List = []
+List2 = []
+for i in range(-100,101,1):
+    List2.append(i)
+
+for i in range(9):
+    a = random.randint(0,100)
+    List.append(a)
+
+
+print(List)
+print(List2)
+
+for i in List:
+    for j in range(len(List2)-1):
+        if i < List2[j]:
+            List2.insert(j,i)
+            break
+
+for i in range(-100,101,1):
+    List2.remove(i)
+
+print(List2)
