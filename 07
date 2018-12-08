@@ -1,0 +1,10 @@
+words = 'apple,banana,mango,pizza,butter,cheese,bread,cream,chicken,fish,tofu'
+w = words.split(',')
+x = sorted(w)
+print(x)
+
+
+myfile = open("a207.txt", "w")
+for i in x:
+    myfile.write(i + '\n')
+myfile.close()
